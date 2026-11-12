@@ -1,0 +1,8 @@
+# mu-dsh-files's bundle patch: one row naming the package itself mounts both
+# halves, the host routes (exports ".") and the web client (exports "./client").
+#
+# Install with `dsh plugin --profile web add github:SleepyMug/mu-dsh-files`,
+# which adds this package to the profile's bundles and so applies this patch.
+- insert:
+    - id: mu-dsh-files
+      name: mu-dsh-files

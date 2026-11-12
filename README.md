@@ -20,6 +20,19 @@ into every user's dsh as a git submodule under `plugins/`. It depends on
 nothing of mu-dsh's, but it is only built and tested the way mu-dsh uses it,
 against the dsh version mu-dsh pins (currently `0.2.1-rc.5`).
 
+## Install
+
+The package is a dsh bundle that mounts itself (`cordis.patch.yml`, one
+row naming the package). Add it to a profile and restart that profile's dsh:
+
+```sh
+dsh plugin --profile web add github:SleepyMug/mu-dsh-files
+```
+
+`link:/path/to/checkout` installs a local checkout instead. To load it
+without its bundle (as mu-dsh does, from its own defaults bundle), depend on
+the package and insert the same row in another patch layer.
+
 ## How it works
 
 The plugin has two halves, both in `lib/` (built output, committed so that
