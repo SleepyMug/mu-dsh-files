@@ -1,5 +1,5 @@
-// Build both halves into lib/, which is committed: mu-dsh installs the plugin
-// without a build step, as it runs the gateway from its sources.
+// Build both halves into lib/, which is committed: mu-dsh installs its plugins
+// without a build step.
 //
 //   lib/index.js   the host half, an ES module dsh imports. It is installed
 //                  outside dsh's own node_modules, so it can import nothing of
@@ -47,7 +47,11 @@ function only(allowed, external) {
 
 const HEADER = '// Built by plugin/build.mjs from plugin/src; edit the sources, not this file.\n'
 
+// Paths in the output are relative to the package, wherever the build is run from.
+const absWorkingDir = here('.')
+
 const host = await build({
+  absWorkingDir,
   entryPoints: [here('src/index.ts')],
   bundle: true,
   format: 'esm',
@@ -59,6 +63,7 @@ const host = await build({
 })
 
 const client = await build({
+  absWorkingDir,
   entryPoints: [here('src/client/index.ts')],
   bundle: true,
   format: 'cjs',
